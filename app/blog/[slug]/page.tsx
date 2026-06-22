@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { company } from "@/data/company";
@@ -49,6 +50,17 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
       <article className="py-16">
         <div className="mx-auto max-w-3xl px-4">
+          <div className="relative mb-10 h-64 sm:h-80 overflow-hidden rounded-xl">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+          </div>
+
           <div className="flex items-center gap-4 text-sm text-muted mb-8 pb-8 border-b border-border">
             <span className="rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">
               {categoryLabels[post.category]}

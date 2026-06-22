@@ -4,8 +4,9 @@ import { company } from "@/data/company";
 const footerLinks = {
   company: [
     { href: "/about", label: "About Us" },
+    { href: "/industries", label: "Industries" },
     { href: "/technology", label: "Technology" },
-    { href: "/careers", label: "Careers" },
+    { href: "/careers", label: "Careers & CSR" },
     { href: "/blog", label: "Blog & Media" },
   ],
   products: [

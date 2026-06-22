@@ -127,6 +127,7 @@ export function BlogCard({
   slug,
   title,
   excerpt,
+  image,
   category,
   date,
   readTime,
@@ -134,6 +135,7 @@ export function BlogCard({
   slug: string;
   title: string;
   excerpt: string;
+  image: string;
   category: string;
   date: string;
   readTime: string;
@@ -149,8 +151,15 @@ export function BlogCard({
       href={`/blog/${slug}`}
       className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl transition-all border border-border"
     >
-      <div className="h-44 bg-gradient-to-br from-secondary to-secondary-dark flex items-end p-6">
-        <span className="rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-white">
+      <div className="relative h-44 overflow-hidden bg-surface">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <span className="absolute bottom-4 left-4 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-white">
           {categoryLabels[category] || category}
         </span>
       </div>

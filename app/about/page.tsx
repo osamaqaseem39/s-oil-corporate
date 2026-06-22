@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   company,
   visionMission,
@@ -39,14 +40,19 @@ export default function AboutPage() {
                 clients across Pakistan and beyond.
               </p>
             </div>
-            <div className="relative h-80 rounded-2xl bg-gradient-to-br from-secondary to-primary overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <p className="text-6xl font-bold opacity-20">SOIL</p>
-                  <p className="mt-2 text-lg font-medium opacity-80">
-                    Premium Lubricants
-                  </p>
-                </div>
+            <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden">
+              <Image
+                src="/blog-maintenance.jpg"
+                alt="S-OIL lubricants and engine maintenance"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
+              <div className="absolute inset-0 flex items-end p-8">
+                <p className="text-lg font-semibold text-white">
+                  Premium Lubricants
+                </p>
               </div>
             </div>
           </div>

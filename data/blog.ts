@@ -2,6 +2,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
+  image: string;
   category: "engine-tips" | "maintenance" | "industry";
   date: string;
   readTime: string;
@@ -14,6 +15,7 @@ export const blogPosts: BlogPost[] = [
     title: "How to Choose the Right Motor Oil Viscosity for Your Car",
     excerpt:
       "Understanding viscosity grades like 5W-30 and 10W-40 is essential for engine protection and fuel efficiency in Pakistan's climate.",
+    image: "/blog-engine-tips.jpg",
     category: "engine-tips",
     date: "2026-05-15",
     readTime: "5 min read",
@@ -29,6 +31,7 @@ export const blogPosts: BlogPost[] = [
     title: "10 Maintenance Tips to Extend Your Engine Life",
     excerpt:
       "Simple habits that protect your engine, improve performance, and save money on costly repairs over the long term.",
+    image: "/blog-maintenance.jpg",
     category: "maintenance",
     date: "2026-05-01",
     readTime: "7 min read",
@@ -45,6 +48,7 @@ export const blogPosts: BlogPost[] = [
     title: "Fleet Oil Management: Reducing Costs for Commercial Operators",
     excerpt:
       "How fleet managers can optimize lubricant selection, drain intervals, and oil analysis to cut operating costs.",
+    image: "/blog-fleet.jpg",
     category: "industry",
     date: "2026-04-20",
     readTime: "6 min read",
@@ -60,6 +64,7 @@ export const blogPosts: BlogPost[] = [
     title: "Motorcycle Oil Guide: Why Wet Clutch Compatibility Matters",
     excerpt:
       "Using the wrong oil in your motorcycle can cause clutch slippage. Learn what JASO MA2 means and why it matters.",
+    image: "/blog-motorcycle.jpg",
     category: "engine-tips",
     date: "2026-04-08",
     readTime: "4 min read",
