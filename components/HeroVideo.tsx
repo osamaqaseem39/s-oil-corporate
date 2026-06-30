@@ -4,86 +4,86 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const POSTER = "/s-oil.jpg";
+const VIDEO_SRC = "/hero.mp4";
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
+  const [showPoster, setShowPoster] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || videoFailed) return;
+    if (!video) return;
 
-    const tryPlay = async () => {
-      try {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        await video.play();
-        setVideoReady(true);
-      } catch {
-        // iOS may block autoplay until more data is loaded — retry on canplay
+    const tryPlay = () => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
+
+      const playPromise = video.play();
+      if (playPromise) {
+        playPromise
+          .then(() => setShowPoster(false))
+          .catch(() => {
+            // Retry after iOS buffers more data
+          });
       }
     };
 
-    const onCanPlay = () => {
-      void tryPlay();
-    };
+    const onPlaying = () => setShowPoster(false);
+    const onError = () => setShowPoster(true);
 
-    const onError = () => {
-      setVideoFailed(true);
-    };
-
-    video.addEventListener("canplay", onCanPlay);
-    video.addEventListener("loadeddata", onCanPlay);
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("canplaythrough", tryPlay);
+    video.addEventListener("loadeddata", tryPlay);
     video.addEventListener("error", onError);
 
     const onVisibility = () => {
-      if (document.visibilityState === "visible") void tryPlay();
+      if (document.visibilityState === "visible") tryPlay();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
-    void tryPlay();
+    // First user touch can unlock playback on strict iOS modes
+    const onTouch = () => tryPlay();
+    document.addEventListener("touchstart", onTouch, { once: true, passive: true });
+
+    tryPlay();
 
     return () => {
-      video.removeEventListener("canplay", onCanPlay);
-      video.removeEventListener("loadeddata", onCanPlay);
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("canplaythrough", tryPlay);
+      video.removeEventListener("loadeddata", tryPlay);
       video.removeEventListener("error", onError);
       document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("touchstart", onTouch);
     };
-  }, [videoFailed]);
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Poster / fallback — always visible until video plays, or if video fails */}
-      <Image
-        src={POSTER}
-        alt=""
-        fill
-        priority
-        className={`object-cover transition-opacity duration-500 ${
-          videoReady && !videoFailed ? "opacity-0" : "opacity-100"
-        }`}
-        sizes="100vw"
-      />
-
-      {!videoFailed && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={POSTER}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            videoReady ? "opacity-100" : "opacity-0"
-          }`}
-          aria-hidden
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+      {showPoster && (
+        <Image
+          src={POSTER}
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
       )}
+
+      <video
+        ref={videoRef}
+        src={VIDEO_SRC}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={POSTER}
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden
+      />
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       <div className="absolute inset-0 bg-primary/20" />

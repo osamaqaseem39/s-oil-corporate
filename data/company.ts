@@ -42,6 +42,11 @@ export const visionMission = {
 
 export const ceoWelcome = {
   title: "Welcome to S-OIL!",
+  mobileSummary: [
+    "Welcome to S-OIL — where 3,000+ employees and our stakeholders are building a trusted energy future together.",
+    "From a small refiner in 1976 to a global refining leader, we are delivering Vision 2035: the most competitive, innovative and trusted energy & chemical company.",
+    "Through the Shaheen Project, we pursue sustainable growth with 35% carbon reduction by 2035 and net zero by 2050.",
+  ],
   leftColumn: [
     "It is with great pleasure that I welcome you to S-OIL website where you will find the amazing growth history of S-OIL and the future the more than 3,000 S-OIL employees are building together with all our stakeholders.",
     "S-OIL that it is today is the story of rising to the challenges, turning crisis into an opportunity and setting new growth heights after another. This resilience and the belief that humanity will keep progressing transformed S-OIL from a small refiner with only 90,000 b/d refining capacity back in 1976 into one of the most competitive and recognized refining and chemical companies armed with integrated, high-complexity refinery 47 years later.",
