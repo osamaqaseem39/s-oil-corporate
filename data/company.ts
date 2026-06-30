@@ -4,6 +4,8 @@ export const company = {
   tagline: "Engineered for Performance. Trusted Worldwide.",
   description:
     "S-OIL is a leading manufacturer of premium motor oils and industrial lubricants, delivering advanced protection and fuel efficiency for passenger cars, commercial fleets, and industrial applications across Pakistan and beyond.",
+  mobileDescription:
+    "Premium motor oils and industrial lubricants for cars, fleets, and industry — advanced protection and fuel efficiency across Pakistan and beyond.",
   founded: "1998",
   headquarters: "Industrial Zone, Karachi, Pakistan",
   employees: "500+",

@@ -18,28 +18,31 @@ export default function HomePage() {
         <HeroVideo />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
-        <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-24 sm:pt-28 sm:pb-32">
+        <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-20 sm:pt-28 sm:pb-32">
           <div className="max-w-3xl">
-            <span className="inline-block text-sm font-semibold uppercase tracking-wider text-teal mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-teal mb-3 sm:text-sm sm:mb-4">
               Pakistan&apos;s Trusted Lubricants Brand
             </span>
-            <div className="w-12 h-px bg-teal/60 mb-6" />
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl leading-tight">
+            <div className="w-12 h-px bg-teal/60 mb-4 sm:mb-6" />
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl leading-tight">
               {company.tagline}
             </h1>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl">
+            <p className="mt-4 text-sm text-white/80 leading-relaxed max-w-xl sm:hidden">
+              {company.mobileDescription}
+            </p>
+            <p className="mt-6 text-lg text-white/80 leading-relaxed max-w-2xl hidden sm:block">
               {company.description}
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
                 href="/products"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-base font-semibold text-white hover:bg-primary-dark transition-colors shadow-lg"
+                className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-white hover:bg-primary-dark transition-colors shadow-lg sm:px-8 sm:py-4 sm:text-base"
               >
                 Find Your Product
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors sm:px-8 sm:py-4 sm:text-base"
               >
                 Contact Us
               </Link>
@@ -47,7 +50,7 @@ export default function HomePage() {
                 href={company.shopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-primary hover:bg-accent-dark transition-colors"
+                className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3.5 text-sm font-semibold text-primary hover:bg-accent-dark transition-colors sm:px-8 sm:py-4 sm:text-base"
               >
                 Shop Online
               </a>
