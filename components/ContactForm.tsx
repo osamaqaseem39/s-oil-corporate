@@ -4,10 +4,12 @@ import { useState, type FormEvent } from "react";
 
 interface ContactFormProps {
   type?: "contact" | "partner" | "career";
+  idPrefix?: string;
 }
 
-export default function ContactForm({ type = "contact" }: ContactFormProps) {
+export default function ContactForm({ type = "contact", idPrefix = "" }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const fieldId = (name: string) => (idPrefix ? `${idPrefix}-${name}` : name);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -34,11 +36,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={fieldId("name")} className="block text-sm font-medium text-foreground mb-1.5">
             Full Name *
           </label>
           <input
-            id="name"
+            id={fieldId("name")}
             name="name"
             type="text"
             required
@@ -47,11 +49,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={fieldId("email")} className="block text-sm font-medium text-foreground mb-1.5">
             Email Address *
           </label>
           <input
-            id="email"
+            id={fieldId("email")}
             name="email"
             type="email"
             required
@@ -63,11 +65,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={fieldId("phone")} className="block text-sm font-medium text-foreground mb-1.5">
             Phone Number
           </label>
           <input
-            id="phone"
+            id={fieldId("phone")}
             name="phone"
             type="tel"
             className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
@@ -76,11 +78,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
         </div>
         {type === "partner" && (
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-foreground mb-1.5">
+            <label htmlFor={fieldId("company")} className="block text-sm font-medium text-foreground mb-1.5">
               Company Name *
             </label>
             <input
-              id="company"
+              id={fieldId("company")}
               name="company"
               type="text"
               required
@@ -91,11 +93,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
         )}
         {type === "career" && (
           <div>
-            <label htmlFor="position" className="block text-sm font-medium text-foreground mb-1.5">
+            <label htmlFor={fieldId("position")} className="block text-sm font-medium text-foreground mb-1.5">
               Position Applied For *
             </label>
             <input
-              id="position"
+              id={fieldId("position")}
               name="position"
               type="text"
               required
@@ -106,11 +108,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
         )}
         {type === "contact" && (
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1.5">
+            <label htmlFor={fieldId("subject")} className="block text-sm font-medium text-foreground mb-1.5">
               Subject
             </label>
             <select
-              id="subject"
+              id={fieldId("subject")}
               name="subject"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             >
@@ -126,11 +128,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
 
       {type === "partner" && (
         <div>
-          <label htmlFor="city" className="block text-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={fieldId("city")} className="block text-sm font-medium text-foreground mb-1.5">
             City / Region *
           </label>
           <input
-            id="city"
+            id={fieldId("city")}
             name="city"
             type="text"
             required
@@ -141,11 +143,11 @@ export default function ContactForm({ type = "contact" }: ContactFormProps) {
       )}
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
+        <label htmlFor={fieldId("message")} className="block text-sm font-medium text-foreground mb-1.5">
           Message *
         </label>
         <textarea
-          id="message"
+          id={fieldId("message")}
           name="message"
           rows={5}
           required

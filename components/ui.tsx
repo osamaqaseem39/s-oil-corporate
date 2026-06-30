@@ -103,20 +103,40 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   breadcrumb?: { label: string; href?: string }[];
+  image?: string;
+  size?: "default" | "large";
+  overlay?: "default" | "subtle";
 }
 
-export function PageHero({ title, subtitle, breadcrumb }: PageHeroProps) {
+export function PageHero({
+  title,
+  subtitle,
+  breadcrumb,
+  image = "/s-oil.jpg",
+  size = "default",
+  overlay = "default",
+}: PageHeroProps) {
+  const sizeClass =
+    size === "large"
+      ? "min-h-[480px] sm:min-h-[560px] flex items-center py-28 sm:py-32"
+      : "py-20";
+
+  const overlayClass =
+    overlay === "subtle"
+      ? "bg-gradient-to-r from-black/75 via-black/45 to-black/25"
+      : "bg-gradient-to-r from-black/75 via-primary/65 to-primary/45";
+
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className={`relative overflow-hidden ${sizeClass}`}>
       <Image
-        src="/s-oil.jpg"
+        src={image}
         alt=""
         fill
         priority
-        className="object-cover"
+        className="object-cover object-center"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-primary/65 to-primary/45" />
+      <div className={`absolute inset-0 ${overlayClass}`} />
       <div className="relative mx-auto max-w-7xl px-4">
         {breadcrumb && (
           <nav className="mb-6 flex items-center gap-2 text-sm text-white/60">

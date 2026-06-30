@@ -2,21 +2,19 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product, ProductCategory } from "@/data/products";
-import { getCategoryBySlug } from "@/data/products";
+import { getCategoryBySlug, formatProductTitle } from "@/data/products";
 
 interface CategoryCardProps {
   slug: ProductCategory;
   name: string;
   description: string;
   image: string;
+  onSelect?: (slug: ProductCategory) => void;
 }
 
-export function CategoryCard({ slug, name, description, image }: CategoryCardProps) {
-  return (
-    <Link
-      href={`/products?category=${slug}`}
-      className="group relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-border"
-    >
+export function CategoryCard({ slug, name, description, image, onSelect }: CategoryCardProps) {
+  const content = (
+    <>
       <div className="relative h-44 overflow-hidden bg-surface">
         <Image
           src={image}
@@ -38,12 +36,30 @@ export function CategoryCard({ slug, name, description, image }: CategoryCardPro
           </svg>
         </span>
       </div>
+    </>
+  );
+
+  const className =
+    "group relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-border block w-full text-left";
+
+  if (onSelect) {
+    return (
+      <button type="button" onClick={() => onSelect(slug)} className={className}>
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <Link href={`/products?category=${slug}`} className={className}>
+      {content}
     </Link>
   );
 }
 
 export function ProductCard({ product }: { product: Product }) {
   const category = getCategoryBySlug(product.category);
+  const title = formatProductTitle(product.name, product.viscosity);
 
   return (
     <Link
@@ -53,7 +69,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="relative h-48 overflow-hidden bg-surface">
         <Image
           src={product.image}
-          alt={`${product.name} ${product.viscosity}`}
+          alt={title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 25vw"
@@ -64,7 +80,7 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
-          {product.name} {product.viscosity}
+          {title}
         </h3>
         <p className="mt-2 flex-1 text-sm text-muted leading-relaxed line-clamp-2">
           {product.shortDescription}
@@ -113,12 +129,16 @@ export function FeatureCard({
   icon: string;
 }) {
   return (
-    <div className="rounded-xl bg-white p-6 shadow-md border border-border hover:shadow-lg transition-shadow">
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-primary-light text-primary">
+    <div className="group rounded-xl bg-white p-6 shadow-md border border-border transition-all duration-300 hover:bg-primary hover:border-primary hover:shadow-xl">
+      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-primary-light text-primary transition-colors duration-300 group-hover:bg-accent group-hover:text-primary">
         {iconMap[icon]}
       </div>
-      <h3 className="text-lg font-bold text-foreground">{title}</h3>
-      <p className="mt-2 text-sm text-muted leading-relaxed">{description}</p>
+      <h3 className="text-lg font-bold text-foreground transition-colors duration-300 group-hover:text-white">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm text-muted leading-relaxed transition-colors duration-300 group-hover:text-white/80">
+        {description}
+      </p>
     </div>
   );
 }

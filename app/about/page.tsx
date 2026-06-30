@@ -1,25 +1,33 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import {
   company,
-  visionMission,
   certifications,
   presence,
 } from "@/data/company";
 import { PageHero, SectionHeading } from "@/components/ui";
+import {
+  CompanyFactsGrid,
+  CompanyHighlightsGrid,
+  BusinessPortfolio,
+  VisionMissionCards,
+  CoreValuesGrid,
+  CompanyHistoryTimeline,
+} from "@/components/CompanyDetails";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: `Learn about ${company.name} — our vision, mission, global presence, and industry certifications.`,
+  title: "Company",
+  description: `Learn about ${company.name} — our vision, business portfolio, history, global presence, and certifications.`,
 };
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="About Us"
-        subtitle="Building trust through quality, innovation, and customer partnership since day one."
-        breadcrumb={[{ label: "About Us" }]}
+        title="Company"
+        subtitle="To be the most competitive, innovative and trusted energy & chemical company."
+        breadcrumb={[{ label: "Company" }]}
       />
 
       <section className="py-20">
@@ -33,12 +41,30 @@ export default function AboutPage() {
                 align="left"
               />
               <p className="text-muted leading-relaxed">
-                With state-of-the-art blending facilities and a commitment to
-                research and development, we manufacture lubricants that meet
-                and exceed international standards. Our products are trusted by
-                individual motorists, commercial fleet operators, and industrial
-                clients across Pakistan and beyond.
+                Established in {company.founded}, {company.legalName} operates
+                state-of-the-art blending facilities with a commitment to research
+                and development. Our products are trusted by individual motorists,
+                commercial fleet operators, and industrial clients across Pakistan
+                and beyond.
               </p>
+              <dl className="mt-8 grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <dt className="font-medium text-foreground">Legal Name</dt>
+                  <dd className="mt-1 text-muted">{company.legalName}</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground">Headquarters</dt>
+                  <dd className="mt-1 text-muted">{company.headquarters}</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground">Founded</dt>
+                  <dd className="mt-1 text-muted">{company.founded}</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-foreground">Employees</dt>
+                  <dd className="mt-1 text-muted">{company.employees}</dd>
+                </div>
+              </dl>
             </div>
             <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden">
               <Image
@@ -51,41 +77,71 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
               <div className="absolute inset-0 flex items-end p-8">
                 <p className="text-lg font-semibold text-white">
-                  Premium Lubricants
+                  Premium Lubricants Since {company.founded}
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="mt-16">
+            <CompanyFactsGrid />
           </div>
         </div>
       </section>
 
       <section className="py-20 bg-surface">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-xl bg-white p-8 shadow-md border border-border">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light text-primary">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-foreground">Our Vision</h3>
-              <p className="mt-3 text-muted leading-relaxed">{visionMission.vision}</p>
-            </div>
-            <div className="rounded-xl bg-white p-8 shadow-md border border-border">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light text-primary">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
-              <p className="mt-3 text-muted leading-relaxed">{visionMission.mission}</p>
-            </div>
+          <SectionHeading
+            label="Company"
+            title="Our Strengths & Achievements"
+            description="Building trust through innovation, sustainability, and a proven track record."
+          />
+          <CompanyHighlightsGrid />
+          <div className="mt-10 text-center">
+            <Link
+              href="/about/competitiveness"
+              className="inline-flex items-center text-primary font-semibold hover:text-primary-dark transition-colors"
+            >
+              Read full competitiveness report
+              <svg className="ml-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
 
+      <BusinessPortfolio />
+
       <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <VisionMissionCards />
+        </div>
+      </section>
+
+      <section className="py-20 bg-surface">
+        <div className="mx-auto max-w-7xl px-4">
+          <SectionHeading
+            label="Our Values"
+            title="What We Stand For"
+            description="The principles that guide every product we make and every partnership we build."
+          />
+          <CoreValuesGrid />
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <SectionHeading
+            label="Our History"
+            title="History of S-OIL"
+            description="From our founding to the present — milestones that shaped who we are today."
+          />
+          <CompanyHistoryTimeline />
+        </div>
+      </section>
+
+      <section className="py-20 bg-surface">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
             label="Global Presence"
@@ -106,7 +162,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-surface">
+      <section className="py-20">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
             label="Certifications"

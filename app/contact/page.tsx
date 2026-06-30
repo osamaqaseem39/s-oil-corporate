@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { company } from "@/data/company";
+import { company, departments } from "@/data/company";
 import { PageHero } from "@/components/ui";
 import ContactForm from "@/components/ContactForm";
 
@@ -62,6 +62,13 @@ export default function ContactPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     ),
                   },
+                  {
+                    label: "Business Hours",
+                    value: company.businessHours,
+                    icon: (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    ),
+                  },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
@@ -86,6 +93,29 @@ export default function ContactPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold text-foreground">Departments</h3>
+                <div className="mt-4 space-y-4">
+                  {departments.map((dept) => (
+                    <div key={dept.name} className="rounded-lg border border-border bg-surface p-4">
+                      <p className="text-sm font-semibold text-foreground">{dept.name}</p>
+                      <a
+                        href={`mailto:${dept.email}`}
+                        className="mt-1 block text-sm text-muted hover:text-primary transition-colors"
+                      >
+                        {dept.email}
+                      </a>
+                      <a
+                        href={`tel:${dept.phone}`}
+                        className="mt-0.5 block text-sm text-muted hover:text-primary transition-colors"
+                      >
+                        {dept.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

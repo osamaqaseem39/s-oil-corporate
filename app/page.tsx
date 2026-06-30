@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { company, whyChooseUs } from "@/data/company";
-import { categories, products } from "@/data/products";
+import { company, whyChooseUs, keyStats } from "@/data/company";
+import { categories } from "@/data/products";
 import { blogPosts } from "@/data/blog";
 import { SectionHeading, CTABanner } from "@/components/ui";
-import { CategoryCard, ProductCard, FeatureCard, BlogCard } from "@/components/Cards";
+import { CategoryCard, FeatureCard, BlogCard } from "@/components/Cards";
 import HeroVideo from "@/components/HeroVideo";
+import WelcomeSection from "@/components/WelcomeSection";
+import { CompanyPreviewSection } from "@/components/CompanyDetails";
 
 export default function HomePage() {
-  const featuredProducts = products.slice(0, 4);
   const latestPosts = blogPosts.slice(0, 3);
 
   return (
@@ -55,6 +56,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <WelcomeSection />
+
       {/* Product Categories */}
       <section className="py-20 bg-surface">
         <div className="mx-auto max-w-7xl px-4">
@@ -68,8 +71,18 @@ export default function HomePage() {
               <CategoryCard key={cat.slug} {...cat} />
             ))}
           </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/products"
+              className="inline-flex rounded-lg bg-secondary px-8 py-3 text-sm font-semibold text-white hover:bg-secondary-dark transition-colors"
+            >
+              View All Products
+            </Link>
+          </div>
         </div>
       </section>
+
+      <CompanyPreviewSection />
 
       {/* Why Choose Us */}
       <section className="py-20">
@@ -98,40 +111,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20 bg-surface">
-        <div className="mx-auto max-w-7xl px-4">
-          <SectionHeading
-            label="Featured"
-            title="Popular Products"
-            description="Our best-selling lubricants trusted by drivers and fleet operators across Pakistan."
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/products"
-              className="inline-flex rounded-lg bg-secondary px-8 py-3 text-sm font-semibold text-white hover:bg-secondary-dark transition-colors"
-            >
-              View All Products
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Stats Banner */}
       <section className="py-16 bg-secondary-dark">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 text-center">
-            {[
-              { value: "25+", label: "Premium Products" },
-              { value: "50+", label: "Cities Served" },
-              { value: "15+", label: "Years Experience" },
-              { value: "1000+", label: "Fleet Partners" },
-            ].map((stat) => (
+            {keyStats.map((stat) => (
               <div key={stat.label}>
                 <p className="text-4xl font-bold text-accent">{stat.value}</p>
                 <p className="mt-2 text-sm text-white/70">{stat.label}</p>

@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { company } from "@/data/company";
 
 const footerLinks = {
   company: [
-    { href: "/about", label: "About Us" },
+    { href: "/about", label: "Company" },
     { href: "/industries", label: "Industries" },
     { href: "/technology", label: "Technology" },
     { href: "/careers", label: "Careers & CSR" },
@@ -28,11 +29,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent font-bold text-primary text-lg">
-                S
-              </span>
-              <span className="text-lg font-bold text-white">-OIL</span>
+            <div className="mb-4">
+              <Logo />
             </div>
             <p className="text-sm text-white/70 leading-relaxed mb-4">
               {company.description.slice(0, 120)}...

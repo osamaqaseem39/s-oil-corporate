@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { href: "/products", label: "Products" },
@@ -12,36 +12,6 @@ const navLinks = [
   { href: "/technology", label: "Technology" },
   { href: "/blog", label: "Blog" },
 ];
-
-function Logo({ light }: { light: boolean }) {
-  if (light) {
-    return (
-      <Link href="/" className="flex items-center shrink-0" aria-label="S-OIL Home">
-        <Image
-          src="/logo.png"
-          alt="S-OIL"
-          width={100}
-          height={36}
-          priority
-          className="h-8 w-auto sm:h-9 brightness-0 invert"
-        />
-      </Link>
-    );
-  }
-
-  return (
-    <Link href="/" className="flex items-center shrink-0" aria-label="S-OIL Home">
-      <Image
-        src="/logo.png"
-        alt="S-OIL"
-        width={100}
-        height={36}
-        priority
-        className="h-8 w-auto sm:h-9"
-      />
-    </Link>
-  );
-}
 
 export default function Header() {
   const pathname = usePathname();
@@ -79,7 +49,7 @@ export default function Header() {
               }`
         }`}
       >
-        <Logo light={isTransparentTop} />
+        <Logo />
 
         <nav className="hidden items-center gap-5 lg:flex">
           {navLinks.map((link) => (

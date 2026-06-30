@@ -8,6 +8,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     "",
     "/about",
+    "/about/competitiveness",
+    "/company/ruc-odc",
+    "/company/djsi-world",
+    "/company/carbon-trust",
+    "/company/history",
     "/products",
     "/industries",
     "/technology",

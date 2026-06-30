@@ -20,12 +20,14 @@ export interface Product {
 }
 
 export const productImages = [
-  "/oil-1.jpg",
-  "/oil-2.jpg",
-  "/oil-3.jpg",
-  "/product-4.jpg",
-  "/product-5.jpg",
-  "/s-oil.jpg",
+  "/products/seven-blue-5w30.jpeg",
+  "/products/seven-red-9.jpeg",
+  "/products/diesel-commercial.jpeg",
+  "/products/diesel-blue-15w40.jpeg",
+  "/products/moto-4t-10w40.jpeg",
+  "/products/moto-2t.jpeg",
+  "/products/fleet-15w40.jpeg",
+  "/products/hydraulic-aw46.jpeg",
 ] as const;
 
 export const categories: {
@@ -39,28 +41,28 @@ export const categories: {
     name: "Passenger Car Motor Oil",
     description:
       "Premium synthetic and semi-synthetic oils for cars, SUVs, and light vehicles.",
-    image: "/oil-1.jpg",
+    image: "/products/seven-blue-5w30.jpeg",
   },
   {
     slug: "motorcycle",
     name: "Motorcycle Oil",
     description:
       "High-performance oils engineered for 2-stroke and 4-stroke motorcycle engines.",
-    image: "/oil-2.jpg",
+    image: "/products/moto-4t-10w40.jpeg",
   },
   {
     slug: "diesel-commercial",
     name: "Diesel / Commercial Oils",
     description:
       "Heavy-duty lubricants for trucks, buses, generators, and commercial fleets.",
-    image: "/oil-3.jpg",
+    image: "/products/diesel-commercial.jpeg",
   },
   {
     slug: "industrial",
     name: "Industrial Lubricants",
     description:
       "Hydraulic, gear, compressor, and specialty oils for industrial machinery.",
-    image: "/product-4.jpg",
+    image: "/products/hydraulic-aw46.jpeg",
   },
 ];
 
@@ -70,7 +72,7 @@ export const products: Product[] = [
     name: "SOIL EDGE",
     category: "passenger-car",
     viscosity: "5W-30",
-    image: "/oil-1.jpg",
+    image: "/products/seven-blue-5w30.jpeg",
     shortDescription:
       "Full synthetic motor oil for maximum engine protection and fuel efficiency.",
     benefits: [
@@ -97,7 +99,7 @@ export const products: Product[] = [
     name: "SOIL EDGE",
     category: "passenger-car",
     viscosity: "10W-40",
-    image: "/oil-2.jpg",
+    image: "/products/seven-red-9.jpeg",
     shortDescription:
       "Semi-synthetic motor oil balancing performance and value for everyday driving.",
     benefits: [
@@ -124,7 +126,7 @@ export const products: Product[] = [
     name: "SOIL MAGNATEC",
     category: "passenger-car",
     viscosity: "20W-50",
-    image: "/oil-3.jpg",
+    image: "/products/seven-red-9.jpeg",
     shortDescription:
       "High-viscosity oil providing non-stop protection from every engine start.",
     benefits: [
@@ -150,7 +152,7 @@ export const products: Product[] = [
     name: "SOIL MOTO 4T",
     category: "motorcycle",
     viscosity: "10W-40",
-    image: "/product-4.jpg",
+    image: "/products/moto-4t-10w40.jpeg",
     shortDescription:
       "Premium 4-stroke motorcycle oil for sport and commuter bikes.",
     benefits: [
@@ -176,7 +178,7 @@ export const products: Product[] = [
     name: "SOIL MOTO 2T",
     category: "motorcycle",
     viscosity: "2T",
-    image: "/product-5.jpg",
+    image: "/products/moto-2t.jpeg",
     shortDescription:
       "Low-smoke 2-stroke oil for motorcycles, chainsaws, and small engines.",
     benefits: [
@@ -201,7 +203,7 @@ export const products: Product[] = [
     name: "SOIL FLEET",
     category: "diesel-commercial",
     viscosity: "15W-40",
-    image: "/s-oil.jpg",
+    image: "/products/fleet-15w40.jpeg",
     shortDescription:
       "Heavy-duty diesel engine oil for trucks, buses, and commercial fleets.",
     benefits: [
@@ -227,7 +229,7 @@ export const products: Product[] = [
     name: "SOIL FLEET",
     category: "diesel-commercial",
     viscosity: "10W-30",
-    image: "/oil-1.jpg",
+    image: "/products/diesel-blue-15w40.jpeg",
     shortDescription:
       "Low-viscosity diesel oil optimized for fuel efficiency in modern fleets.",
     benefits: [
@@ -252,7 +254,7 @@ export const products: Product[] = [
     name: "SOIL HYDRAULIC AW",
     category: "industrial",
     viscosity: "AW 46",
-    image: "/oil-2.jpg",
+    image: "/products/hydraulic-aw46.jpeg",
     shortDescription:
       "Anti-wear hydraulic oil for industrial machinery and mobile equipment.",
     benefits: [
@@ -277,7 +279,7 @@ export const products: Product[] = [
     name: "SOIL GEAR EP",
     category: "industrial",
     viscosity: "EP 220",
-    image: "/oil-3.jpg",
+    image: "/products/diesel-commercial.jpeg",
     shortDescription:
       "Extreme pressure gear oil for industrial gearboxes and transmissions.",
     benefits: [
@@ -309,4 +311,10 @@ export function getProductBySlug(slug: string) {
 
 export function getCategoryBySlug(slug: ProductCategory) {
   return categories.find((c) => c.slug === slug);
+}
+
+export function formatProductTitle(name: string, viscosity: string) {
+  return name.toLowerCase().includes(viscosity.toLowerCase())
+    ? name
+    : `${name} ${viscosity}`;
 }
